@@ -13,7 +13,42 @@ body, html {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
 }
-
+.toastMessage{
+    position: fixed;
+    top: 10%;
+    right: 10%;
+    padding: .4rem 1rem;
+    border: 2px solid rgb(132, 197, 204);
+    border-radius: 5px;
+    background-color: rgb(61, 239, 61);
+    cursor: default;
+}
+.toastMessage-slide-in{
+    animation: toastMessage-animation-in 0.5s ease;
+}
+@keyframes toastMessage-animation-in{
+    from{
+        transform: translateX(300px);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.toastMessage-slide-out{
+    animation: toastMessage-animation-out 0.5s ease;
+}
+@keyframes toastMessage-animation-out{
+    from{
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to{
+        transform: translateX(300px);
+        opacity: 0;
+    }
+}
 .container {
     text-align: center;
     padding: 20px;
@@ -32,17 +67,29 @@ h1 {
 .container2{
     width: 60%;
     height: 150px;
-    margin: 3rem auto;
+    margin:  auto;
     border: 2px solid black;
     display: block ;
     border-radius: 5px;
 }
-
+.inputbtn{
+    margin: 1rem auto;
+}
+.inputbtn input{
+    padding: .4rem .5rem;
+    text-align: center;
+    border: none;
+    outline: none;
+}
+.buttondiv{
+    position: relative;
+}
 button {
     padding: 10px 20px;
     font-size: 16px;
     color: white;
     background-color: #007BFF;
+    display: inline-block;
     border: none;
     border-radius: 5px;
     cursor: pointer;
