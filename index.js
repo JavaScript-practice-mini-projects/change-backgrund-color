@@ -27,11 +27,12 @@ function main(){
 
    // color code copy button 
    copyButton.addEventListener('click', function(){
+    colorCodeShow.select();
     navigator.clipboard.writeText(colorCodeShow.value);
     if( copiedContainer !== null){
         copiedContainer.remove();
         copiedContainer = null;
-        colorCodeShow.select()
+        
     }
     generateToastMsg(`${colorCodeShow.value} Copied!`);
    
@@ -81,25 +82,4 @@ function generateToastMsg(msg){
     } */
 }
 
-
-// if click colorCodeShow input button then select their value text & copied!
-
-    colorCodeShow.addEventListener('click', () => {
-        colorCodeShow.select();
-        navigator.clipboard.writeText(colorCodeShow.value);
-        const tostMsg = document.createElement('div')
-        tostMsg.textContent = 'copied!';
-        tostMsg.style.position = 'absolute';
-        tostMsg.style.bottom = '5%';
-        tostMsg.style.right = '32%';
-        tostMsg.style.padding = '5px 10px';
-        tostMsg.style.borderRadius = '5px';
-        tostMsg.style.fontSize = '14px'
-        inputButton.appendChild(tostMsg);
-
-        // remove toastMessage after 0.7 second 
-        setTimeout(() => {
-            tostMsg.remove();
-        }, 700 )
-    })
 

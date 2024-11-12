@@ -79,7 +79,7 @@ h1 {
 .inputbtn input{
     padding: .4rem .5rem;
     text-align: center;
-    border: none;
+    
     outline: none;
 }
 .buttondiv{
