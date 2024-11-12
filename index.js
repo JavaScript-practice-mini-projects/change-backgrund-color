@@ -1,5 +1,7 @@
 
 //step
+// globals
+let copiedContainer = null;
 // step 1 onload handler
 window.onload = () => {
     main();
@@ -20,6 +22,10 @@ function main(){
    // color code copy button 
    copyButton.addEventListener('click', function(){
     navigator.clipboard.writeText(colorShow.value);
+    if( copiedContainer !== null){
+        copiedContainer.remove();
+        copiedContainer = null;
+    }
     generateToastMsg(`${colorShow.value} Copied!`);
 
    
@@ -38,19 +44,25 @@ function GeneratorRGBColor() {
 
 // generateToastMsg
 function generateToastMsg(msg){
-    const copiedContainer = document.createElement("div");
+    copiedContainer = document.createElement("div");
     copiedContainer.textContent = msg;
     copiedContainer.className = 'toastMessage toastMessage-slide-in';
 
   
     copiedContainer.addEventListener('click', function() {
         copiedContainer.classList.remove('toastMessage-slide-in');
-        copiedContainer.classList.add('toastMessage-slide-out')
+        copiedContainer.classList.add('toastMessage-slide-out');
         copiedContainer.addEventListener('animationend', function() {
-            copiedContainer.remove()
+            copiedContainer.remove();
+            copiedContainer = null;
         })
     })
 
     document.body.appendChild(copiedContainer);
+
+    setTimeout(() => {
+        copiedContainer.remove();
+        copiedContainer = null;
+    }, 3000);
 }
 
