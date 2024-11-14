@@ -13,12 +13,32 @@
     <div class="container">
         <h1>Click the button to change the background color</h1>
         <div class="container2" id="colorContainer"></div>
+
         <div class="inputbtn" id="inputbtn">
-            <input type="text" id="colorCodeShow" placeholder="Your color code">
+
+            <div class="inputRGB" id="inputRGB">
+                <h5>RGB color code</h5>
+                <div class="clrBtnIptRGB">
+                    <span class="defaultHash">#</span>
+                     <input class="colorCodeShaw" type="text" id="RGB" placeholder="Your color code">
+                    <button class="copyButton" id="copyButton">copy Color </button>   
+                </div>
+                
+            </div>
+
+            <div class="inputHex" id="inputHex">
+                <h5>Hex color code</h5>
+                <div class="clrBtnIptHex"> 
+                    <span class="defaultHash">#</span>
+                    <input class="colorCodeShaw" type="text" id="colorCodeShowHex" placeholder="Your color code">
+                    <button class="copyButton" id="copyButton">copy Color </button>
+                </div>
+
+            </div>
+
         </div>
         <div class="buttondiv">
             <button  id="changeButton">Change Background</button>
-             <button  id="copyButton">copy Color </button>   
              
         </div>
     </div>

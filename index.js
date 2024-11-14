@@ -2,7 +2,7 @@
 
 
 // globals
-const colorCodeShow = document.getElementById('colorCodeShow');
+const colorCodeShowHex = document.getElementById('colorCodeShowHex');
 const inputButton = document.getElementById('inputbtn');
 const colorContainer = document.getElementById('colorContainer');
 
@@ -21,28 +21,28 @@ function main(){
    changeButton.addEventListener('click', function () {
        const HexColor = GenerateHexColor();
         colorContainer.style.backgroundColor = HexColor;
-        colorCodeShow.value = HexColor;
+        colorCodeShowHex.value = HexColor;
    })
 
    // color code copy button 
    copyButton.addEventListener('click', function(){
-    colorCodeShow.select();
-    navigator.clipboard.writeText(colorCodeShow.value);
+    colorCodeShowHex.select();
+    navigator.clipboard.writeText(colorCodeShowHex.value);
     if( copiedContainer !== null){
         copiedContainer.remove();
         copiedContainer = null;
         
     }
-   if(isValidColor(colorCodeShow.value)){
+   if(isValidColor(colorCodeShowHex.value)){
 
-       generateToastMsg(`${colorCodeShow.value} Copied!`);
+       generateToastMsg(`${colorCodeShowHex.value} Copied!`);
    }else{
     alert('Your color is Invalid')
    }
    
    })
 
-   colorCodeShow.addEventListener('keyup', function(e){
+   colorCodeShowHex.addEventListener('keyup', function(e){
     const color = e.target.value;
 
     if(color && isValidColor(color)){

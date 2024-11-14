@@ -1,10 +1,9 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body, html {
-    margin: 0;
-    padding: 0;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -50,6 +49,7 @@ body, html {
     }
 }
 .container {
+    width: 100%;
     text-align: center;
     padding: 20px;
     background-color: white;
@@ -59,45 +59,83 @@ body, html {
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 28px;
     color: #333;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     margin: 1rem;
 }
 .container2{
-    width: 60%;
+    width: 90%;
     height: 150px;
     margin:  auto;
     border: 2px solid black;
     display: block ;
     border-radius: 5px;
 }
+
+
+
 .inputbtn{
+    width: 90%;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
     position: relative;
     margin: 1rem auto;
 }
-.inputbtn input{
-    padding: .4rem .5rem;
-    text-align: center;
-    
+.inputRGB, .inputHex{
+    text-align: start;
+}
+.clrBtnIptRGB, .clrBtnIptHex{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.colorCodeShaw,
+.colorCodeShaw{
+    width: 55%;
+    margin: .5rem 0;
+    padding: 0.5rem 1rem;
+    padding-left: 2rem;
+    border-radius: 5px;
+    border: 1px solid gray;
     outline: none;
 }
-.buttondiv{
-    position: relative;
-}
-button {
-    padding: 10px 20px;
-    font-size: 16px;
+.copyButton{
+    width: 40%;
+    padding: 0.5rem ;
+    font-size: 15px;
     color: white;
     background-color: #007BFF;
-    display: inline-block;
+    padding: none !important;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
+
 }
 
-button:hover {
-    background-color: rgb(0, 86, 179);
+#changeButton{
+    width: 90%;
+    padding: 0.5rem ;
+    font-size: 15px;
+    color: white;
+    background-color: #007BFF;
+    padding: none !important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.copyButton:hover, #changeButton:hover{
+    background-color: #0f59a7;;
+}
+.defaultHash {
+    position: absolute;
+    top: 15%;
+    left: 0%;
+    color: gray;
+    border-right: 1px solid gray;
+    padding: .5rem;
 }
