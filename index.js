@@ -4,6 +4,7 @@
 // globals
 const colorCodeShow = document.getElementById('colorCodeShow');
 const inputButton = document.getElementById('inputbtn');
+const colorContainer = document.getElementById('colorContainer');
 
 let copiedContainer = null;
 
@@ -13,7 +14,6 @@ window.onload = () => {
     main();
 }
 function main(){
-    const colorContainer = document.getElementById('colorContainer');
     const changeButton = document.getElementById('changeButton');
     const copyButton = document.getElementById('copyButton');
 
@@ -22,7 +22,6 @@ function main(){
        const HexColor = GenerateHexColor();
         colorContainer.style.backgroundColor = HexColor;
         colorCodeShow.value = HexColor;
-        
    })
 
    // color code copy button 
@@ -34,9 +33,29 @@ function main(){
         copiedContainer = null;
         
     }
-    generateToastMsg(`${colorCodeShow.value} Copied!`);
+    if(isValidHex(color)){
+        generateToastMsg(`${colorCodeShow.value} Copied!`);
+    }else{
+        alert('Invalid your code')
+    }
+    
    
    })
+
+   colorCodeShow.addEventListener('keyup', function(e){
+    const color = e.target.value;
+
+    if(color && isValidColor(color)){
+        colorContainer.style.backgroundColor = color;
+        console.log(color)
+        console.log(colorContainer)
+    }
+   })
+
+
+
+
+
 } // main function end 
 
 // step 2 - random RGB color generator function
@@ -82,4 +101,16 @@ function generateToastMsg(msg){
     } */
 }
 
+/* 
+* @param {string} color : ;
+*/
 
+function isValidColor(color){
+    //#ff00ee
+    if(color.length !== 7) return false;
+    if(color[0] !== '#') return false;
+
+    color = color.substring(1)
+    
+    return /^[0-9A-Fa-f]{6}$/i.test(color);
+}
