@@ -33,12 +33,12 @@ function main(){
         copiedContainer = null;
         
     }
-    if(isValidHex(color)){
-        generateToastMsg(`${colorCodeShow.value} Copied!`);
-    }else{
-        alert('Invalid your code')
-    }
-    
+   if(isValidColor(colorCodeShow.value)){
+
+       generateToastMsg(`${colorCodeShow.value} Copied!`);
+   }else{
+    alert('Your color is Invalid')
+   }
    
    })
 
