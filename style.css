@@ -1,17 +1,126 @@
+
 *{
     margin: 0;
     padding: 0;
+    border: none;
+    outline: none;
+    text-decoration: none;
     box-sizing: border-box;
 }
-body, html {
-    height: 100%;
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background-color: #dddeee;
+
+}
+
+/* main container  */
+.container{
+    width: 600px;
+    margin: 5rem auto;
+    padding: 3rem;
+    background-color: #fffffd;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+/* container upper part : here display title & color show container  */
+.displayTitle{
+    padding-bottom: .5rem;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dddeee;
+}
+.displayTitle p, .colorChangeTitle p{
+    color: #900C3F;
+    cursor: pointer;
+}
+.displayColor{
+    width: 100%;
+    min-height: 8rem;
+    margin: .8rem 0;
+    background-color: #dddeee;
+}
+
+/* container lower part : here all of color functionalities */
+.changeAndCopy{
+    width: 100%;
+    margin-top: 2rem;
+}
+.colorChangeTitle{
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dddeee;
+}
+
+
+.colorChangeMode{
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.selectColorMode{
+    display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
 }
+.selectColorMode input{
+    margin-left: 0.7rem;
+}
+.selectColorMode label{
+    display: inline-block;
+}
+.colorInputAndCode{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.hexInputOutput{
+    width: 45%;
+}
+.hexInputOutput input{
+    width: 100%;
+    margin-top: 0.4rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid #dddeee;
+    border-radius: 5px;
+}
+.RGBinputOutput{
+    width: 45%;
+}
+.RGBinputOutput input{
+    width: 100%;
+    margin-top: 0.4rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid #dddeee;
+    border-radius: 5px;
+
+}
+
+/* RGB color adjusting slider  */
+.adjustRGBcolor{
+    margin-top: 2rem;
+}
+.RGBcolorAdjusting{
+    margin-top: 1rem;
+    display: flex;
+    justify-content:space-between;
+}
+.colorRange{
+    margin: 0.4rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+
+
+/* 
 .toastMessage{
     position: fixed;
     top: 10%;
@@ -47,95 +156,4 @@ body, html {
         transform: translateX(300px);
         opacity: 0;
     }
-}
-.container {
-    width: 100%;
-    text-align: center;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  
-}
-
-h1 {
-    font-size: 28px;
-    color: #333;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 1rem;
-}
-.container2{
-    width: 90%;
-    height: 150px;
-    margin:  auto;
-    border: 2px solid black;
-    display: block ;
-    border-radius: 5px;
-}
-
-
-
-.inputbtn{
-    width: 90%;
-    margin: 1rem 0;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    margin: 1rem auto;
-}
-.inputRGB, .inputHex{
-    text-align: start;
-}
-.clrBtnIptRGB, .clrBtnIptHex{
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.colorCodeShaw,
-.colorCodeShaw{
-    width: 55%;
-    margin: .5rem 0;
-    padding: 0.5rem 1rem;
-    padding-left: 2rem;
-    border-radius: 5px;
-    border: 1px solid gray;
-    outline: none;
-}
-.copyButton{
-    width: 40%;
-    padding: 0.5rem ;
-    font-size: 15px;
-    color: white;
-    background-color: #007BFF;
-    padding: none !important;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-}
-
-#changeButton{
-    width: 90%;
-    padding: 0.5rem ;
-    font-size: 15px;
-    color: white;
-    background-color: #007BFF;
-    padding: none !important;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.copyButton:hover, #changeButton:hover{
-    background-color: #0f59a7;;
-}
-.defaultHash {
-    position: absolute;
-    top: 15%;
-    left: 0%;
-    color: gray;
-    border-right: 1px solid gray;
-    padding: .5rem;
-}
+} */

@@ -3,47 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change Background</title>
+    <title> Color Picker </title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-
-
     <div class="container">
-        <h1>Click the button to change the background color</h1>
-        <div class="container2" id="colorContainer"></div>
-
-        <div class="inputbtn" id="inputbtn">
-
-            <div class="inputRGB" id="inputRGB">
-                <h5>RGB color code</h5>
-                <div class="clrBtnIptRGB">
-                    <!-- <span class="defaultHash">#</span> -->
-                     <input class="colorCodeShaw" type="text" id="colorCodeShowRGB" placeholder="Your color code">
-                    <button class="copyButton" id="copyButtonRGB">copy Color </button>   
-                </div>
-                
+        
+        <div class="displayTitleColorArea"> 
+            <div class="displayTitle">
+                <h3>Display Color</h3>
+                <p>Random Color</p>
             </div>
-
-            <div class="inputHex" id="inputHex">
-                <h5>Hex color code</h5>
-                <div class="clrBtnIptHex"> 
-                    <span class="defaultHash">#</span>
-                    <input class="colorCodeShaw" type="text" id="colorCodeShowHex" placeholder="Your color code">
-                    <button class="copyButton" id="copyButtonHex">copy Color </button>
-                </div>
-
+            
+            <div class="displayColor">
+                <!-- Here show color  -->
             </div>
 
         </div>
-        <div class="buttondiv">
-            <button  id="changeButton">Change Background</button>
-             
+        <div class="changeAndCopy">
+            <div class="colorChangeTitle">
+                <h3>Change & Copy color</h3>
+                <p>Copy To Clipboard</p>
+            </div>
+            <div class="colorChangeMode">
+                <p>Select Copy Mode</p>
+                <div class="selectColorMode">
+                    <input type="radio" name="color" id="">
+                    <label for="">Hex</label>
+                    <input type="radio" name="color" id="">
+                    <label for="">RGB</label>
+                </div>
+            </div>
+            <div class="colorInputAndCode">
+                <div class="hexInputOutput">
+                    <h4>Hex</h4>
+                    <input type="text" placeholder="000000">
+                </div>
+                <div class="RGBinputOutput">
+                    <h4>RGB</h4>
+                    <input type="text" placeholder="rgb(0, 0, 0)">
+                </div>
+            </div>
+            <div class="adjustRGBcolor">
+                <h3>Adjust RGB Color</h3>
+                <div class="RGBcolorAdjusting">
+                    <div class="RGBcolorRed">
+                        <div class="rgbTitleAndValue">
+                            <div class="colorRange"><p>Red</p> <p>255</p></div>
+                            <input type="range" name="" id="" min="0" max="255" value="255">
+                        </div>
+                    </div>
+                    <div class="RGBcolorGreen">
+                        <div class="rgbTitleAndValue">
+                           <div class="colorRange"> <p>Red</p> <p>250</p></div>
+                            <input type="range" name="" id="" min="0" max="255" value="250">
+                        </div>
+                    </div>
+                    <div class="RGBcolorBlue">
+                        <div class="rgbTitleAndValue">
+                           <div class="colorRange"> <p>Red</p> <p>240</p></div>
+                            <input type="range" name="" id="" min="0" max="255" value="240">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
+   
 
-    <script src="index.js"></script>
+    <!-- <script src="index.js"></script> -->
 </body>
 </html>

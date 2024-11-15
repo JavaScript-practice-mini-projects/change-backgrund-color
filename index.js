@@ -6,6 +6,7 @@ const colorCodeShowHex = document.getElementById('colorCodeShowHex');
 const inputButton = document.getElementById('inputbtn');
 const colorContainer = document.getElementById('colorContainer');
 const colorCodeShowRGB = document.getElementById('colorCodeShowRGB');
+const copyButtonRGB = document.getElementById('copyButtonRGB');
 
 let copiedContainer = null;
 
@@ -49,17 +50,32 @@ function main(){
    }
    
    })
+   copyButtonRGB.addEventListener('click', function(){
+    colorCodeShowRGB.select();
+    navigator.clipboard.writeText(`#${colorCodeShowRGB.value}`);
+    if( copiedContainer !== null){
+        copiedContainer.remove();
+        copiedContainer = null;
+        
+    }
+   if(isValidColor(colorCodeShowHex.value)){
+       generateToastMsg(`${colorCodeShowRGB.value} Copied!`);
+   }else{
+    alert('Your color is Invalid')
+   }
+   
+   })
 
 
-
+   //Hex input color code change hex and rgb input & change backgroundColor
    colorCodeShowHex.addEventListener('keyup', function(e){
     const color = e.target.value;
     if(color){
         colorCodeShowHex.value = color.toUpperCase()
         if(color && isValidColor(color)){
             colorContainer.style.backgroundColor = `#${color}`;
-    }
-
+            colorCodeShowRGB.value = hexToRgb(color);
+     }
     }
    })
 
@@ -118,6 +134,20 @@ function GenerateHexColor({red, green, blue}) {
 function generateRGBColor({red, green, blue}){
     return `rgb(${red}, ${green}, ${blue})`;
 }
+
+
+/**
+ * Convert hex color to RGB  color
+ * @param {string} hex 
+ */
+function hexToRgb(hex){
+    const r = parseInt(hex.slice(0, 2), 16);
+    const g = parseInt(hex.slice(2, 4), 16);
+    const b = parseInt(hex.slice(4), 16);
+    
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 
 // generateToastMsg
 function generateToastMsg(msg){
