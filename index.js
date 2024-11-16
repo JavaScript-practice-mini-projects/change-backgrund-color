@@ -24,25 +24,11 @@ window.onload = () => {
 function main(){
 
     const generateRandomColorButton = document.getElementById('generateRandomColorButton')
-
-    generateRandomColorButton.addEventListener('click', function() {
-        handleGenerateRandomColorButton()
-    });
+    generateRandomColorButton.addEventListener('click', handleGenerateRandomColorButton)
 
     const HexColorInputOutput = document.getElementById('HexColorInputOutput')
-
-    HexColorInputOutput.addEventListener('keyup', function(event){
-    const HexColorCode = event.target.value; // #000000
-    if(HexColorCode){
-        HexColorInputOutput.value = HexColorCode.toUpperCase()
-
-        if(isValidColor(HexColorCode)){
-            const hexToDecimal = hexToDecimalNumber(HexColorCode);
-            updateColorToDom(hexToDecimal)
-
-     }
-    }
-   });
+    HexColorInputOutput.addEventListener('keyup', handleHexColorInputOutput)
+  
 
 
 //    copyButtonHex.addEventListener('click', function(){
@@ -99,9 +85,19 @@ function main(){
 
 function handleGenerateRandomColorButton(){
     const color = generateRandomDecimalNumber() 
-        updateColorToDom(color)
-        
+        updateColorToDom(color)    
 }
+function handleHexColorInputOutput(event){
+    const HexColorCode = event.target.value; // #000000
+    if(HexColorCode){
+        event.target.value = HexColorCode.toUpperCase();
+        if(isValidColor(HexColorCode)){
+            const hexToDecimal = hexToDecimalNumber(HexColorCode); // get hexToDecimal object
+            updateColorToDom(hexToDecimal)
+     }
+    }
+   };
+
 
 //DOM function
 
@@ -130,7 +126,7 @@ function updateColorToDom(color){
     const Hex = GenerateHexColor(color) //{red: 251, green: 74, blue: 10}
     const RGB = generateRGBColor(color) //{red: 251, green: 74, blue: 10}
  document.getElementById('displayColor').style.backgroundColor = Hex;
- document.getElementById('HexColorInputOutput').value = Hex;
+ document.getElementById('HexColorInputOutput').value = Hex.slice(1);
  document.getElementById('RGBColorInputOutput').value = RGB;
  document.getElementById('colorSliderRed').value = color.red;
  document.getElementById('colorSliderGreen').value = color.green;
@@ -156,9 +152,7 @@ function generateRandomDecimalNumber(){
 
 /**
  *decimal number to Hexadecimal color code Generator 
- * @param {string} red - red decimal number
- * @param {string} green - green decimal number
- * @param {string} blue - blue decimal number
+ * @param {object} {red, green, blue}
  * @returns  {string} hex color code
  */
 
