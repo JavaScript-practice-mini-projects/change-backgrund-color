@@ -1,5 +1,10 @@
 
-
+/**
+ * Date : nov 16 2024
+ * Title : color generator tools
+ * Description : this tools for rgb and hex random color generator and also color generate input valid color code.
+ * author : M H R Habib.
+ */
 
 // Globals variable
 const colorCodeShowHex = document.getElementById('colorCodeShowHex');
@@ -10,85 +15,84 @@ const copyButtonRGB = document.getElementById('copyButtonRGB');
 
 let copiedContainer = null;
 
-
-//window loaded : first visit then load this and call main function
+//Onload handler 
 window.onload = () => {
     main();
 }
 
-// main function : always reloaded this function
+// main or boot function, The function will take care of getting all the DOM references
 function main(){
-    const changeButton = document.getElementById('changeButton');
-    const copyButtonHex = document.getElementById('copyButtonHex');
+
+    const generateRandomColorButton = document.getElementById('generateRandomColorButton')
+
+    generateRandomColorButton.addEventListener('click', function() {
+        handleGenerateRandomColorButton()
+    })
+
+    
+
+    // const changeButton = document.getElementById('changeButton');
+    // const copyButtonHex = document.getElementById('copyButtonHex');
 
 
-   // Color Change Button function call
-   changeButton.addEventListener('click', function () {
-       const colorObject = generateRandomDecimalNumber();
-       const HexColor = GenerateHexColor(colorObject);
-       const RGBColor = generateRGBColor(colorObject);
+//    // Color Change Button function call
+//   
 
-        colorCodeShowHex.value = HexColor.substring(1).toUpperCase();
-        colorContainer.style.backgroundColor = HexColor;
-        colorCodeShowRGB.value = RGBColor;
-   })
-
-
-   // color code copy button 
-   copyButtonHex.addEventListener('click', function(){
-    colorCodeShowHex.select();
-    navigator.clipboard.writeText(`#${colorCodeShowHex.value}`);
-    if( copiedContainer !== null){
-        copiedContainer.remove();
-        copiedContainer = null;
+//    // color code copy button 
+//    copyButtonHex.addEventListener('click', function(){
+//     colorCodeShowHex.select();
+//     navigator.clipboard.writeText(`#${colorCodeShowHex.value}`);
+//     if( copiedContainer !== null){
+//         copiedContainer.remove();
+//         copiedContainer = null;
         
-    }
-   if(isValidColor(colorCodeShowHex.value)){
-       generateToastMsg(`#${colorCodeShowHex.value} Copied!`);
-   }else{
-    alert('Your color is Invalid')
-   }
+//     }
+//    if(isValidColor(colorCodeShowHex.value)){
+//        generateToastMsg(`#${colorCodeShowHex.value} Copied!`);
+//    }else{
+//     alert('Your color is Invalid')
+//    }
    
-   })
-   copyButtonRGB.addEventListener('click', function(){
-    colorCodeShowRGB.select();
-    navigator.clipboard.writeText(`#${colorCodeShowRGB.value}`);
-    if( copiedContainer !== null){
-        copiedContainer.remove();
-        copiedContainer = null;
+//    })
+//    copyButtonRGB.addEventListener('click', function(){
+//     colorCodeShowRGB.select();
+//     navigator.clipboard.writeText(`#${colorCodeShowRGB.value}`);
+//     if( copiedContainer !== null){
+//         copiedContainer.remove();
+//         copiedContainer = null;
         
-    }
-   if(isValidColor(colorCodeShowHex.value)){
-       generateToastMsg(`${colorCodeShowRGB.value} Copied!`);
-   }else{
-    alert('Your color is Invalid')
-   }
+//     }
+//    if(isValidColor(colorCodeShowHex.value)){
+//        generateToastMsg(`${colorCodeShowRGB.value} Copied!`);
+//    }else{
+//     alert('Your color is Invalid')
+//    }
    
-   })
+//    })
 
 
-   //Hex input color code change hex and rgb input & change backgroundColor
-   colorCodeShowHex.addEventListener('keyup', function(e){
-    const color = e.target.value;
-    if(color){
-        colorCodeShowHex.value = color.toUpperCase()
-        if(color && isValidColor(color)){
-            colorContainer.style.backgroundColor = `#${color}`;
-            colorCodeShowRGB.value = hexToRgb(color);
-     }
-    }
-   })
+//    //Hex input color code change hex and rgb input & change backgroundColor
+//    colorCodeShowHex.addEventListener('keyup', function(event){
+//     const color = event.target.value;
+//     if(color){
+//         colorCodeShowHex.value = color.toUpperCase()
+//         if(color && isValidColor(color)){
+//             colorContainer.style.backgroundColor = `#${color}`;
+//             colorCodeShowRGB.value = hexToRgb(color);
+//      }
+//     }
+//    })
 
 
-   //click Enter key change color
-   changeButton.addEventListener('click', () => {
-    document.addEventListener('keydown', clickEnter)
-   })
-  function clickEnter(even){
-    if( even.key === 'Enter'){
-        document.removeEventListener('keydown', clickEnter);
-    }
-  }
+//    //click Enter key change color
+//    changeButton.addEventListener('click', () => {
+//     document.addEventListener('keydown', clickEnter)
+//    })
+//   function clickEnter(even){
+//     if( even.key === 'Enter'){
+//         document.removeEventListener('keydown', clickEnter);
+//     }
+//   }
 
 
 
@@ -96,58 +100,15 @@ function main(){
 
 
 
-//Generate random number for color code
-function generateRandomDecimalNumber(){
-    const red = Math.floor(Math.random() * 255);
-    const green = Math.floor(Math.random() * 255);
-    const blue = Math.floor(Math.random() * 255);
-    return{
-        red,
-        green,
-        blue,
-    };
-}
+//Even handler
 
-
-//Generate Hexadecimal color code
-function GenerateHexColor({red, green, blue}) {
-
-    const getHexCode = (value) => {
-        let hex = value.toString(16);
-        return hex.length === 1 ? `0${hex}` : hex;
+function handleGenerateRandomColorButton(){
+    const color = generateRandomDecimalNumber() 
+        updateColorToDom(color)
         
-    }
-    return `#${getHexCode(red)}${getHexCode(green)}${getHexCode(blue)}`.toUpperCase();
-
-
-
-/*
-    //another way
-    const redCode = red.toString(16).padStart(2, '0');
-    const greenCode = green.toString(16).padStart(2, '0');
-    const blueCode = blue.toString(16).padStart(2, '0');
-    return  `#${redCode}${greenCode}${blueCode}`.toUpperCase();
-    */
 }
 
-//Generate RGB color code
-function generateRGBColor({red, green, blue}){
-    return `rgb(${red}, ${green}, ${blue})`;
-}
-
-
-/**
- * Convert hex color to RGB  color
- * @param {string} hex 
- */
-function hexToRgb(hex){
-    const r = parseInt(hex.slice(0, 2), 16);
-    const g = parseInt(hex.slice(2, 4), 16);
-    const b = parseInt(hex.slice(4), 16);
-    
-    return `rgb(${r}, ${g}, ${b})`;
-}
-
+//DOM function
 
 // generateToastMsg
 function generateToastMsg(msg){
@@ -166,21 +127,100 @@ function generateToastMsg(msg){
 
     document.body.appendChild(copiedContainer);
 
-    //type error : can't read properties of null (reading "remove") 
-    /*if( copiedContainer !== null){
-        setTimeout(() => {
-            copiedContainer.remove();
-            copiedContainer = null;
-        }, 3000);
-    } */
 }
 
-/* 
-* @param {string} color : ;
-*/
+/**
+ * update Dom elements with calculated color values
+ * @param {object} color 
+ */
+function updateColorToDom(color){ 
+    const Hex = GenerateHexColor(color) //{red: 251, green: 74, blue: 10}
+    const RGB = generateRGBColor(color) //{red: 251, green: 74, blue: 10}
+ document.getElementById('displayColor').style.backgroundColor = Hex;
+ document.getElementById('HexColorInputOutput').value = Hex;
+ document.getElementById('RGBColorInputOutput').value = RGB;
+ document.getElementById('colorSliderRed').value = color.red;
+ document.getElementById('colorSliderGreen').value = color.green;
+ document.getElementById('colorSliderBlue').value = color.blue;
+ document.getElementById('colorSliderRedLabel').textContent = color.red;
+ document.getElementById('colorSliderGreenLabel').textContent = color.green;
+ document.getElementById('colorSliderBlueLabel').textContent = color.blue;
+}
 
+
+
+//Utils function
+
+
+
+
+/**
+ *Generate random number for color code
+ * @returns {object} {red,green,blue}
+ */
+
+function generateRandomDecimalNumber(){
+    const red = Math.floor(Math.random() * 255);
+    const green = Math.floor(Math.random() * 255);
+    const blue = Math.floor(Math.random() * 255);
+  
+    return {red,green,blue};
+    
+}
+
+/**
+ *Generate Hexadecimal color code 
+ * @param {string} red - red decimal number
+ * @param {string} green - green decimal number
+ * @param {string} blue - blue decimal number
+ * @returns  {string} hex color code
+ */
+
+function GenerateHexColor({red, green, blue}) {
+
+    const getHexCode = (value) => {
+        let hex = value.toString(16);
+        return hex.length === 1 ? `0${hex}` : hex;
+        
+    }
+    return `#${getHexCode(red)}${getHexCode(green)}${getHexCode(blue)}`.toUpperCase();
+
+}
+
+
+/**
+ *Generate RGB color code 
+ * @param {string} red - red decimal number
+ * @param {string} green - green decimal number
+ * @param {string} blue - blue decimal number
+ * @returns {string} RGBcolor code 
+ */
+function generateRGBColor({red, green, blue}){
+    return `rgb(${red}, ${green}, ${blue})`;
+}
+
+
+/**
+ * convert Hex color to rgb color 
+ * @param {string} hex 
+ * @returns Object 
+ */
+function hexToDecimalNumber(hex){
+    const red = parseInt(hex.slice(0, 2), 16);
+    const green = parseInt(hex.slice(2, 4), 16);
+    const blue = parseInt(hex.slice(4), 16);
+    return {red, green, blue};
+   
+}
+
+
+/**
+ * validate hex color code
+ * @param {string} color 
+ * @returns {boolean}
+ */
 function isValidColor(color){
-    //#ff00ee
+    
     if(color.length !== 6) return false;
   
     return /^[0-9A-Fa-f]{6}$/i.test(color);

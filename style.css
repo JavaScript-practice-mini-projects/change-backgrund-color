@@ -31,10 +31,12 @@ body{
     align-items: center;
     border-bottom: 1px solid #dddeee;
 }
-.displayTitle p, .colorChangeTitle p{
+.displayTitle button, .colorChangeTitle button{
     color: #900C3F;
     cursor: pointer;
+    padding: 0.3rem 0.5rem;
 }
+
 .displayColor{
     width: 100%;
     min-height: 8rem;
@@ -80,11 +82,21 @@ body{
 }
 .hexInputOutput{
     width: 45%;
+    position: relative;
 }
-.hexInputOutput input{
+.hexInputOutput > span {
+    position: absolute;
+    bottom: 1.7%;
+    left: 0%;
+    background-color: #dddeee;
+    padding: 5px .5rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.hexInputOutput input {
     width: 100%;
     margin-top: 0.4rem;
-    padding: 0.4rem 1rem;
+    padding: 0.4rem 1.8rem;
     border: 1px solid #dddeee;
     border-radius: 5px;
 }

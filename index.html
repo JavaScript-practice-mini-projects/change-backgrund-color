@@ -13,10 +13,11 @@
         <div class="displayTitleColorArea"> 
             <div class="displayTitle">
                 <h3>Display Color</h3>
-                <p>Random Color</p>
+                <button id="generateRandomColorButton">Random Color</button>
+               
             </div>
             
-            <div class="displayColor">
+            <div class="displayColor" id="displayColor">
                 <!-- Here show color  -->
             </div>
 
@@ -24,25 +25,26 @@
         <div class="changeAndCopy">
             <div class="colorChangeTitle">
                 <h3>Change & Copy color</h3>
-                <p>Copy To Clipboard</p>
+                <button>Copy To Clipboard</button>
             </div>
             <div class="colorChangeMode">
                 <p>Select Copy Mode</p>
                 <div class="selectColorMode">
-                    <input type="radio" name="color" id="">
-                    <label for="">Hex</label>
-                    <input type="radio" name="color" id="">
-                    <label for="">RGB</label>
+                    <input type="radio" name="color" id="selectHexMode">
+                    <label for="selectHexMode">Hex</label>
+                    <input type="radio" name="color" id="selectRGBMode">
+                    <label for="selectRGBMode">RGB</label>
                 </div>
             </div>
             <div class="colorInputAndCode">
                 <div class="hexInputOutput">
+                    <span>#</span>
                     <h4>Hex</h4>
-                    <input type="text" placeholder="000000">
+                    <input type="text" placeholder="dddeee" id="HexColorInputOutput">
                 </div>
                 <div class="RGBinputOutput">
                     <h4>RGB</h4>
-                    <input type="text" placeholder="rgb(0, 0, 0)">
+                    <input type="text" placeholder="rgb(221 222 238)" id="RGBColorInputOutput">
                 </div>
             </div>
             <div class="adjustRGBcolor">
@@ -50,20 +52,20 @@
                 <div class="RGBcolorAdjusting">
                     <div class="RGBcolorRed">
                         <div class="rgbTitleAndValue">
-                            <div class="colorRange"><p>Red</p> <p>255</p></div>
-                            <input type="range" name="" id="" min="0" max="255" value="255">
+                            <div class="colorRange"><p>Red</p> <p id="colorSliderRedLabel">221</p></div>
+                            <input type="range" name="" id="colorSliderRed" min="0" max="255" >
                         </div>
                     </div>
                     <div class="RGBcolorGreen">
                         <div class="rgbTitleAndValue">
-                           <div class="colorRange"> <p>Red</p> <p>250</p></div>
-                            <input type="range" name="" id="" min="0" max="255" value="250">
+                           <div class="colorRange"> <p>Red</p> <p id="colorSliderGreenLabel">222</p></div>
+                            <input type="range" name="" id="colorSliderGreen" min="0" max="255" >
                         </div>
                     </div>
                     <div class="RGBcolorBlue">
                         <div class="rgbTitleAndValue">
-                           <div class="colorRange"> <p>Red</p> <p>240</p></div>
-                            <input type="range" name="" id="" min="0" max="255" value="240">
+                           <div class="colorRange"> <p>Red</p> <p id="colorSliderBlueLabel">238</p></div>
+                            <input type="range" name="" id="colorSliderBlue" min="0" max="255" >
                         </div>
                     </div>
                 </div>
@@ -74,6 +76,6 @@
 
    
 
-    <!-- <script src="index.js"></script> -->
+    <script src="index.js"></script>
 </body>
 </html>
