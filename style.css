@@ -138,7 +138,7 @@ label{
 
 
 
-/* 
+
 .toastMessage{
     position: fixed;
     top: 10%;
@@ -174,4 +174,4 @@ label{
         transform: translateX(300px);
         opacity: 0;
     }
-} */
+}

@@ -9,10 +9,17 @@
 // Globals variable
 
 let toastMessageContainer = null;
+const defaultColor = {
+    red : 221,
+    green : 222,
+    blue : 238
+}
+
 
 //Onload handler 
 window.onload = () => {
     main();
+    updateColorToDom(defaultColor)
 }
 
 // main or boot function, The function will take care of getting all the DOM references
@@ -25,28 +32,13 @@ function main(){
     const colorSliderRed = document.getElementById('colorSliderRed')
     const colorSliderGreen = document.getElementById('colorSliderGreen')
     const colorSliderBlue = document.getElementById('colorSliderBlue')
-    const colorModeRadio = document.getElementsByName('colorMode');
+
     const copyToClipBoardButton = document.getElementById('copyToClipBoardButton');
     
     copyToClipBoardButton.addEventListener('click', function(){
-        const mode = getRadioButtonValue(colorModeRadio)
-        if( mode === null){
-            throw new Error('Invalid Radio Input')
-        }
-        if(mode == 'hex'){
-            const HexColor = document.getElementById('HexColorInputOutput').value
-            navigator.clipboard.writeText(`#${HexColor}`)
-            
-        }else{
-            const RGBcolor = document .getElementById('RGBColorInputOutput').value 
-            navigator.clipboard.writeText(`rgb${RGBcolor}`)
-        }
+        handlerCopyToClipBoardButton()
     })
     
-    
-    
-    
-
     
     // event listeners
     generateRandomColorButton.addEventListener('click', handleGenerateRandomColorButton)
@@ -72,7 +64,11 @@ function handleHexColorInputOutput(event){
         if(isValidColor(HexColorCode)){
             const hexToDecimal = hexToDecimalNumber(HexColorCode); // get hexToDecimal object
             updateColorToDom(hexToDecimal)
-     }
+       }
+    //    else{
+    //     const HexValue =  document.getElementById('HexColorInputOutput').value
+    //     generateToastMsg(`#${HexValue} is Invalid Hex code`)
+    //    }
     }
    };
    function handlerColorSlider(colorSliderRed, colorSliderGreen, colorSliderBlue){
@@ -83,6 +79,40 @@ function handleHexColorInputOutput(event){
     };
     updateColorToDom(color);
 }
+
+function handlerCopyToClipBoardButton(){
+    const colorModeRadio = document.getElementsByName('colorMode');
+    const mode = getRadioButtonValue(colorModeRadio)
+    if( mode === null){
+        throw new Error('Invalid Radio Input')
+    }
+
+    if( toastMessageContainer !== null){
+        toastMessageContainer.remove();
+        toastMessageContainer = null;
+                
+    }
+
+    if(mode == 'hex'){
+        const HexColor = document.getElementById('HexColorInputOutput').value
+        if( HexColor && isValidColor(HexColor)){
+            navigator.clipboard.writeText(`#${HexColor}`)
+            generateToastMsg(`#${HexColor} Copied!`)
+        }else{
+            alert('Invalid Hex color code')
+        }
+        
+    }else{
+        const RGBcolor = document .getElementById('RGBColorInputOutput').value 
+        if(RGBcolor){
+            navigator.clipboard.writeText(`rgb${RGBcolor}`)
+            generateToastMsg(`rgb${RGBcolor} Copied!`)
+        }else{
+            alert('Invalid RGB color code')
+        }
+    }
+}
+
 
 
 
@@ -106,6 +136,7 @@ function generateToastMsg(msg){
         })
     })
     document.body.appendChild(toastMessageContainer);
+    
 }
 
 
@@ -210,50 +241,3 @@ function isValidColor(color){
   
     return /^[0-9A-Fa-f]{6}$/i.test(color);
 }
-
-
-
-//    copyButtonHex.addEventListener('click', function(){
-//     colorCodeShowHex.select();
-//     navigator.clipboard.writeText(`#${colorCodeShowHex.value}`);
-//     if( copiedContainer !== null){
-//         copiedContainer.remove();
-//         copiedContainer = null;
-        
-//     }
-//    if(isValidColor(colorCodeShowHex.value)){
-//        generateToastMsg(`#${colorCodeShowHex.value} Copied!`);
-//    }else{
-//     alert('Your color is Invalid')
-//    }
-   
-//    })
-//    copyButtonRGB.addEventListener('click', function(){
-//     colorCodeShowRGB.select();
-//     navigator.clipboard.writeText(`#${colorCodeShowRGB.value}`);
-//     if( copiedContainer !== null){
-//         copiedContainer.remove();
-//         copiedContainer = null;
-        
-//     }
-//    if(isValidColor(colorCodeShowHex.value)){
-//        generateToastMsg(`${colorCodeShowRGB.value} Copied!`);
-//    }else{
-//     alert('Your color is Invalid')
-//    }
-   
-//    })
-
-
-
-
-
-//    //click Enter key change color
-//    changeButton.addEventListener('click', () => {
-//     document.addEventListener('keydown', clickEnter)
-//    })
-//   function clickEnter(even){
-//     if( even.key === 'Enter'){
-//         document.removeEventListener('keydown', clickEnter);
-//     }
-//   }
