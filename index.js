@@ -7,13 +7,8 @@
  */
 
 // Globals variable
-const colorCodeShowHex = document.getElementById('colorCodeShowHex');
-const inputButton = document.getElementById('inputbtn');
-const colorContainer = document.getElementById('colorContainer');
-const colorCodeShowRGB = document.getElementById('colorCodeShowRGB');
-const copyButtonRGB = document.getElementById('copyButtonRGB');
 
-let copiedContainer = null;
+let toastMessageContainer = null;
 
 //Onload handler 
 window.onload = () => {
@@ -23,65 +18,48 @@ window.onload = () => {
 // main or boot function, The function will take care of getting all the DOM references
 function main(){
 
+    // Dom references
+
     const generateRandomColorButton = document.getElementById('generateRandomColorButton')
-    generateRandomColorButton.addEventListener('click', handleGenerateRandomColorButton)
-
     const HexColorInputOutput = document.getElementById('HexColorInputOutput')
+    const colorSliderRed = document.getElementById('colorSliderRed')
+    const colorSliderGreen = document.getElementById('colorSliderGreen')
+    const colorSliderBlue = document.getElementById('colorSliderBlue')
+    const colorModeRadio = document.getElementsByName('colorMode');
+    const copyToClipBoardButton = document.getElementById('copyToClipBoardButton');
+    
+    copyToClipBoardButton.addEventListener('click', function(){
+        const mode = getRadioButtonValue(colorModeRadio)
+        if( mode === null){
+            throw new Error('Invalid Radio Input')
+        }
+        if(mode == 'hex'){
+            const HexColor = document.getElementById('HexColorInputOutput').value
+            navigator.clipboard.writeText(`#${HexColor}`)
+            
+        }else{
+            const RGBcolor = document .getElementById('RGBColorInputOutput').value 
+            navigator.clipboard.writeText(`rgb${RGBcolor}`)
+        }
+    })
+    
+    
+    
+    
+
+    
+    // event listeners
+    generateRandomColorButton.addEventListener('click', handleGenerateRandomColorButton)
     HexColorInputOutput.addEventListener('keyup', handleHexColorInputOutput)
-  
-
-
-//    copyButtonHex.addEventListener('click', function(){
-//     colorCodeShowHex.select();
-//     navigator.clipboard.writeText(`#${colorCodeShowHex.value}`);
-//     if( copiedContainer !== null){
-//         copiedContainer.remove();
-//         copiedContainer = null;
-        
-//     }
-//    if(isValidColor(colorCodeShowHex.value)){
-//        generateToastMsg(`#${colorCodeShowHex.value} Copied!`);
-//    }else{
-//     alert('Your color is Invalid')
-//    }
-   
-//    })
-//    copyButtonRGB.addEventListener('click', function(){
-//     colorCodeShowRGB.select();
-//     navigator.clipboard.writeText(`#${colorCodeShowRGB.value}`);
-//     if( copiedContainer !== null){
-//         copiedContainer.remove();
-//         copiedContainer = null;
-        
-//     }
-//    if(isValidColor(colorCodeShowHex.value)){
-//        generateToastMsg(`${colorCodeShowRGB.value} Copied!`);
-//    }else{
-//     alert('Your color is Invalid')
-//    }
-   
-//    })
-
-
-
-
-
-//    //click Enter key change color
-//    changeButton.addEventListener('click', () => {
-//     document.addEventListener('keydown', clickEnter)
-//    })
-//   function clickEnter(even){
-//     if( even.key === 'Enter'){
-//         document.removeEventListener('keydown', clickEnter);
-//     }
-//   }
-
-
-
+    colorSliderRed.addEventListener('change', () => {handlerColorSlider(colorSliderRed, colorSliderGreen, colorSliderBlue)})
+    colorSliderGreen.addEventListener('change',  () =>{ handlerColorSlider(colorSliderRed, colorSliderGreen, colorSliderBlue)})
+    colorSliderBlue.addEventListener('change', () => { handlerColorSlider(colorSliderRed, colorSliderGreen, colorSliderBlue)})
+    
+    
 } // main function end 
 
 
-//Even handler
+//Event handler
 
 function handleGenerateRandomColorButton(){
     const color = generateRandomDecimalNumber() 
@@ -97,26 +75,40 @@ function handleHexColorInputOutput(event){
      }
     }
    };
+   function handlerColorSlider(colorSliderRed, colorSliderGreen, colorSliderBlue){
+    const color = {
+        red: parseInt( colorSliderRed.value),
+        green: parseInt(colorSliderGreen.value),
+        blue: parseInt(colorSliderBlue.value),
+    };
+    updateColorToDom(color);
+}
+
 
 
 //DOM function
 
-// generateToastMsg
+/**
+ * Generate dynamic a dom element to show a toast messages
+ * @param {string} msg 
+ */
 function generateToastMsg(msg){
-    copiedContainer = document.createElement("div");
-    copiedContainer.textContent = msg;
-    copiedContainer.className = 'toastMessage toastMessage-slide-in';
+    toastMessageContainer = document.createElement("div");
+    toastMessageContainer.textContent = msg;
+    toastMessageContainer.className = 'toastMessage toastMessage-slide-in';
 
-    copiedContainer.addEventListener('click', function() {
-        copiedContainer.classList.remove('toastMessage-slide-in');
-        copiedContainer.classList.add('toastMessage-slide-out');
-        copiedContainer.addEventListener('animationend', function() {
-            copiedContainer.remove();
-            copiedContainer = null;
+    toastMessageContainer.addEventListener('click', function() {
+        toastMessageContainer.classList.remove('toastMessage-slide-in');
+        toastMessageContainer.classList.add('toastMessage-slide-out');
+        toastMessageContainer.addEventListener('animationend', function() {
+            toastMessageContainer.remove();
+            toastMessageContainer = null;
         })
     })
-    document.body.appendChild(copiedContainer);
+    document.body.appendChild(toastMessageContainer);
 }
+
+
 
 /**
  * update Dom elements with calculated color values
@@ -127,13 +119,29 @@ function updateColorToDom(color){
     const RGB = generateRGBColor(color) //{red: 251, green: 74, blue: 10}
  document.getElementById('displayColor').style.backgroundColor = Hex;
  document.getElementById('HexColorInputOutput').value = Hex.slice(1);
- document.getElementById('RGBColorInputOutput').value = RGB;
+ document.getElementById('RGBColorInputOutput').value = RGB.slice(3);
  document.getElementById('colorSliderRed').value = color.red;
  document.getElementById('colorSliderGreen').value = color.green;
  document.getElementById('colorSliderBlue').value = color.blue;
  document.getElementById('colorSliderRedLabel').textContent = color.red;
  document.getElementById('colorSliderGreenLabel').textContent = color.green;
  document.getElementById('colorSliderBlueLabel').textContent = color.blue;
+}
+
+/**
+ * find the checked element from a list of radio buttons
+ * @param {array} nodes 
+ * @returns {string | null}  checked radio button value
+ */
+function getRadioButtonValue(nodes){ // [input#selectHexMode, input#selectRGBMode]
+    let checkValue = null;
+    for(let i = 0; i < nodes.length; i++){
+        if(nodes[i].checked){
+            checkValue = nodes[i].value
+            break;
+        }
+    }
+    return checkValue;
 }
 
 //Utils function
@@ -202,3 +210,50 @@ function isValidColor(color){
   
     return /^[0-9A-Fa-f]{6}$/i.test(color);
 }
+
+
+
+//    copyButtonHex.addEventListener('click', function(){
+//     colorCodeShowHex.select();
+//     navigator.clipboard.writeText(`#${colorCodeShowHex.value}`);
+//     if( copiedContainer !== null){
+//         copiedContainer.remove();
+//         copiedContainer = null;
+        
+//     }
+//    if(isValidColor(colorCodeShowHex.value)){
+//        generateToastMsg(`#${colorCodeShowHex.value} Copied!`);
+//    }else{
+//     alert('Your color is Invalid')
+//    }
+   
+//    })
+//    copyButtonRGB.addEventListener('click', function(){
+//     colorCodeShowRGB.select();
+//     navigator.clipboard.writeText(`#${colorCodeShowRGB.value}`);
+//     if( copiedContainer !== null){
+//         copiedContainer.remove();
+//         copiedContainer = null;
+        
+//     }
+//    if(isValidColor(colorCodeShowHex.value)){
+//        generateToastMsg(`${colorCodeShowRGB.value} Copied!`);
+//    }else{
+//     alert('Your color is Invalid')
+//    }
+   
+//    })
+
+
+
+
+
+//    //click Enter key change color
+//    changeButton.addEventListener('click', () => {
+//     document.addEventListener('keydown', clickEnter)
+//    })
+//   function clickEnter(even){
+//     if( even.key === 'Enter'){
+//         document.removeEventListener('keydown', clickEnter);
+//     }
+//   }

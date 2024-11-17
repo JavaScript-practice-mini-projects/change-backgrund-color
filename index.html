@@ -25,14 +25,14 @@
         <div class="changeAndCopy">
             <div class="colorChangeTitle">
                 <h3>Change & Copy color</h3>
-                <button>Copy To Clipboard</button>
+                <button id="copyToClipBoardButton">Copy To Clipboard</button>
             </div>
             <div class="colorChangeMode">
                 <p>Select Copy Mode</p>
                 <div class="selectColorMode">
-                    <input type="radio" name="color" id="selectHexMode">
+                    <input type="radio" name="colorMode" id="selectHexMode" value="hex" checked>
                     <label for="selectHexMode">Hex</label>
-                    <input type="radio" name="color" id="selectRGBMode">
+                    <input type="radio" name="colorMode" id="selectRGBMode" value="rgb">
                     <label for="selectRGBMode">RGB</label>
                 </div>
             </div>
@@ -43,8 +43,9 @@
                     <input type="text" placeholder="dddeee" id="HexColorInputOutput">
                 </div>
                 <div class="RGBinputOutput">
+                    <span>RGB</span>
                     <h4>RGB</h4>
-                    <input type="text" placeholder="rgb(221 222 238)" id="RGBColorInputOutput">
+                    <input type="text" placeholder="(221 222 238)" id="RGBColorInputOutput">
                 </div>
             </div>
             <div class="adjustRGBcolor">
@@ -58,13 +59,13 @@
                     </div>
                     <div class="RGBcolorGreen">
                         <div class="rgbTitleAndValue">
-                           <div class="colorRange"> <p>Red</p> <p id="colorSliderGreenLabel">222</p></div>
+                           <div class="colorRange"> <p>Green</p> <p id="colorSliderGreenLabel">222</p></div>
                             <input type="range" name="" id="colorSliderGreen" min="0" max="255" >
                         </div>
                     </div>
                     <div class="RGBcolorBlue">
                         <div class="rgbTitleAndValue">
-                           <div class="colorRange"> <p>Red</p> <p id="colorSliderBlueLabel">238</p></div>
+                           <div class="colorRange"> <p>Blue</p> <p id="colorSliderBlueLabel">238</p></div>
                             <input type="range" name="" id="colorSliderBlue" min="0" max="255" >
                         </div>
                     </div>
