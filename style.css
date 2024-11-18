@@ -18,7 +18,7 @@ body{
 /* main container  */
 .container{
     width: 600px;
-    margin: 5rem auto;
+    margin:2rem auto;
     padding: 3rem;
     background-color: #fffffd;
     box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
@@ -174,4 +174,30 @@ label{
         transform: translateX(300px);
         opacity: 0;
     }
+}
+
+
+/* presetColorContainer */
+.presetColorContainer{
+    width: 100%;
+    margin-top: 2rem;
+}
+.presetColorHeader{
+    border-bottom: 1px solid #dddeee;
+    padding-bottom: 0.5rem;
+
+}
+.presetColors{
+    padding-top: 1rem;
+    grid-gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat( 4, 1fr)
+}
+
+
+/* js dynamic class and id  */
+.colorBox{
+    height: 2rem;
+    border: 1px solid gray;
+    cursor: pointer;
 }

@@ -1,4 +1,10 @@
 
+/*
+  Node: update list
+  * if user hex input with # then slice it and generate or change color code.
+*/
+
+
 /**
  * Date : nov 16 2024
  * Title : color generator tools
@@ -15,11 +21,21 @@ const defaultColor = {
     blue : 238
 }
 
+const presetColorList = ['#FFB6C1', '#FFDAB9', '#FFFACD', '#E6E6FA', '#F0FFF0', '#FAFAD2', '#F5FFFA', '#F0F8FF', '#F5F5DC', '#FFE4E1', '#E0FFFF', '#D8BFD8', '#D3D3D3', '#FFFAF0', '#FFF5EE', '#FDF5E6', '#F8F8FF', '#FFF0F5', '#FAEBD7', '#FFFFE0'];
+
+const copySound = new Audio('Audio/mixkit-fast-double-click-on-mouse-275.wav')
+  
+
 
 //Onload handler 
 window.onload = () => {
     main();
     updateColorToDom(defaultColor)
+
+    // Display preset colors
+    const parent = document.getElementById('presetColors')
+    displayColorBoxes(parent, presetColorList) // parent, color
+    
 }
 
 // main or boot function, The function will take care of getting all the DOM references
@@ -32,12 +48,9 @@ function main(){
     const colorSliderRed = document.getElementById('colorSliderRed')
     const colorSliderGreen = document.getElementById('colorSliderGreen')
     const colorSliderBlue = document.getElementById('colorSliderBlue')
-
     const copyToClipBoardButton = document.getElementById('copyToClipBoardButton');
+    const presetColorsParent = document.getElementById('presetColors')
     
-    copyToClipBoardButton.addEventListener('click', function(){
-        handlerCopyToClipBoardButton()
-    })
     
     
     // event listeners
@@ -46,7 +59,8 @@ function main(){
     colorSliderRed.addEventListener('change', () => {handlerColorSlider(colorSliderRed, colorSliderGreen, colorSliderBlue)})
     colorSliderGreen.addEventListener('change',  () =>{ handlerColorSlider(colorSliderRed, colorSliderGreen, colorSliderBlue)})
     colorSliderBlue.addEventListener('change', () => { handlerColorSlider(colorSliderRed, colorSliderGreen, colorSliderBlue)})
-    
+    copyToClipBoardButton.addEventListener('click', () => { handlerCopyToClipBoardButton()})
+    presetColorsParent.addEventListener('click', handlerPresetColorsParent)
     
 } // main function end 
 
@@ -113,6 +127,15 @@ function handlerCopyToClipBoardButton(){
     }
 }
 
+function handlerPresetColorsParent(event) {
+    const child = event.target
+    if(child.className === 'colorBox'){
+        navigator.clipboard.writeText(child.getAttribute('dataColor'))
+        copySound.volume = 0.2
+        copySound.play();
+    }
+}
+
 
 
 
@@ -174,6 +197,32 @@ function getRadioButtonValue(nodes){ // [input#selectHexMode, input#selectRGBMod
     }
     return checkValue;
 }
+
+/**
+ * Create a div element with class name color box
+ * @param {string} color 
+ * @returns {object}
+ */
+function generateColorBox(color){
+    const div = document.createElement('div')
+    div.className = 'colorBox'
+    div.style.backgroundColor = color
+    div.setAttribute('dataColor', color)
+    return div;
+}
+
+/**
+ * This function will create and append color boxes to it's parent
+ * @param {object} parent 
+ * @param {Array} colors
+ */
+function displayColorBoxes(parent, colors){
+    colors.forEach((color) => {
+        const colorBox = generateColorBox(color)
+        parent.appendChild(colorBox);
+    })
+}
+
 
 //Utils function
 
