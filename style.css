@@ -209,4 +209,5 @@ label{
     height: 2rem;
     border: 1px solid gray;
     cursor: pointer;
+    border-radius: 3px;
 }

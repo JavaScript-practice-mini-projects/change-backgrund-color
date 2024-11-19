@@ -148,9 +148,26 @@ function handlerPresetColorsParent(event) {
 
 function handlerSaveCustomColorButton(parent, HexColorInputOutput){
     return function(){
-        customColorList.push(`#${HexColorInputOutput.value}`)
-        removeChildren(parent)
-        displayColorBoxes(parent, customColorList)
+        const hexColor = `#${HexColorInputOutput.value}`
+        if(customColorList.includes(hexColor)){
+            if( toastMessageContainer !== null){
+                toastMessageContainer.remove();
+                toastMessageContainer = null;
+            }
+            generateToastMsg(`${hexColor} is already your list`)
+        }else{
+           if(customColorList.length < 12){
+            customColorList.unshift(hexColor)
+            removeChildren(parent)
+            displayColorBoxes(parent, customColorList)
+           }else{
+            if( toastMessageContainer !== null){
+                toastMessageContainer.remove();
+                toastMessageContainer = null;
+            }
+            generateToastMsg('Your save list full')
+           }
+        }
     }
 }
 
