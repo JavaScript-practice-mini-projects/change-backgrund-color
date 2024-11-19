@@ -9,75 +9,90 @@
 <body>
 
     <section class="container">
+        <div class="colorDisplayAndInputOutput">
+            <div class="displayTitleColorArea"> 
+                <div class="displayTitle">
+                    <h3>Display Color</h3>
+                    <button id="generateRandomColorButton">Random Color</button>
+                   
+                </div>
+                
+                <div class="displayColor" id="displayColor">
+                    <!-- Here show color  -->
+                </div>
+    
+            </div>
+            <div class="changeAndCopy">
+                <div class="colorChangeTitle">
+                    <h3>Change & Copy color</h3>
+                    <div>
+                        <button id="saveCustomColorButton">Save</button>
+                        <button id="copyToClipBoardButton">Copy</button>
+                    </div>
+                </div>
+                <div class="colorChangeMode">
+                    <p>Select Copy Mode</p>
+                    <div class="selectColorMode">
+                        <input type="radio" name="colorMode" id="selectHexMode" value="hex" checked>
+                        <label for="selectHexMode">Hex</label>
+                        <input type="radio" name="colorMode" id="selectRGBMode" value="rgb">
+                        <label for="selectRGBMode">RGB</label>
+                    </div>
+                </div>
+                <div class="colorInputAndCode">
+                    <div class="hexInputOutput">
+                        <span>#</span>
+                        <h4>Hex</h4>
+                        <input type="text" placeholder="dddeee" id="HexColorInputOutput">
+                    </div>
+                    <div class="RGBinputOutput">
+                        <span>RGB</span>
+                        <h4>RGB</h4>
+                        <input type="text" placeholder="(221 222 238)" id="RGBColorInputOutput">
+                    </div>
+                </div>
+                <div class="adjustRGBcolor">
+                    <h3>Adjust RGB Color</h3>
+                    <div class="RGBcolorAdjusting">
+                        <div class="RGBcolorRed">
+                            <div class="rgbTitleAndValue">
+                                <div class="colorRange"><p>Red</p> <p id="colorSliderRedLabel">221</p></div>
+                                <input type="range" name="" id="colorSliderRed" min="0" max="255" >
+                            </div>
+                        </div>
+                        <div class="RGBcolorGreen">
+                            <div class="rgbTitleAndValue">
+                               <div class="colorRange"> <p>Green</p> <p id="colorSliderGreenLabel">222</p></div>
+                                <input type="range" name="" id="colorSliderGreen" min="0" max="255" >
+                            </div>
+                        </div>
+                        <div class="RGBcolorBlue">
+                            <div class="rgbTitleAndValue">
+                               <div class="colorRange"> <p>Blue</p> <p id="colorSliderBlueLabel">238</p></div>
+                                <input type="range" name="" id="colorSliderBlue" min="0" max="255" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
         
-        <div class="displayTitleColorArea"> 
-            <div class="displayTitle">
-                <h3>Display Color</h3>
-                <button id="generateRandomColorButton">Random Color</button>
-               
-            </div>
-            
-            <div class="displayColor" id="displayColor">
-                <!-- Here show color  -->
-            </div>
-
-        </div>
-        <div class="changeAndCopy">
-            <div class="colorChangeTitle">
-                <h3>Change & Copy color</h3>
-                <button id="copyToClipBoardButton">Copy To Clipboard</button>
-            </div>
-            <div class="colorChangeMode">
-                <p>Select Copy Mode</p>
-                <div class="selectColorMode">
-                    <input type="radio" name="colorMode" id="selectHexMode" value="hex" checked>
-                    <label for="selectHexMode">Hex</label>
-                    <input type="radio" name="colorMode" id="selectRGBMode" value="rgb">
-                    <label for="selectRGBMode">RGB</label>
-                </div>
-            </div>
-            <div class="colorInputAndCode">
-                <div class="hexInputOutput">
-                    <span>#</span>
-                    <h4>Hex</h4>
-                    <input type="text" placeholder="dddeee" id="HexColorInputOutput">
-                </div>
-                <div class="RGBinputOutput">
-                    <span>RGB</span>
-                    <h4>RGB</h4>
-                    <input type="text" placeholder="(221 222 238)" id="RGBColorInputOutput">
-                </div>
-            </div>
-            <div class="adjustRGBcolor">
-                <h3>Adjust RGB Color</h3>
-                <div class="RGBcolorAdjusting">
-                    <div class="RGBcolorRed">
-                        <div class="rgbTitleAndValue">
-                            <div class="colorRange"><p>Red</p> <p id="colorSliderRedLabel">221</p></div>
-                            <input type="range" name="" id="colorSliderRed" min="0" max="255" >
-                        </div>
-                    </div>
-                    <div class="RGBcolorGreen">
-                        <div class="rgbTitleAndValue">
-                           <div class="colorRange"> <p>Green</p> <p id="colorSliderGreenLabel">222</p></div>
-                            <input type="range" name="" id="colorSliderGreen" min="0" max="255" >
-                        </div>
-                    </div>
-                    <div class="RGBcolorBlue">
-                        <div class="rgbTitleAndValue">
-                           <div class="colorRange"> <p>Blue</p> <p id="colorSliderBlueLabel">238</p></div>
-                            <input type="range" name="" id="colorSliderBlue" min="0" max="255" >
-                        </div>
-                    </div>
+        <div class="colorPresetAndCustoms">
+                <!-- preset Color Container -->
+            <div class="presetColorContainer">
+                <div class="presetColorHeader"><h3>Preset Color</h3></div>
+                <div class="presetColors" id="presetColors">
+                    <!-- here store all preset colors  -->
                 </div>
             </div>
 
-        </div>
-
-        <div class="presetColorContainer">
-            <div class="presetColorHeader"><h3>Preset Color</h3></div>
-            <div class="presetColors" id="presetColors">
-                <!-- here store all preset colors  -->
+            <!-- customColorContainer -->
+            <div class="customColorContainer">
+                <div class="customColorHeader"><h3>Custom Color</h3></div>
+                <div class="customColors" id="customColors">
+                    <!-- here store all custom colors  -->
+                </div>
             </div>
         </div>
     </section>

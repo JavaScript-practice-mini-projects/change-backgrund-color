@@ -17,11 +17,17 @@ body{
 
 /* main container  */
 .container{
-    width: 600px;
+    width: 1000px;
     margin:2rem auto;
     padding: 3rem;
     background-color: #fffffd;
     box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    
+}
+.colorDisplayAndInputOutput{
+    width: 48%;
 }
 /* container upper part : here display title & color show container  */
 .displayTitle{
@@ -178,20 +184,23 @@ label{
 
 
 /* presetColorContainer */
-.presetColorContainer{
+.colorPresetAndCustoms{
+    width: 48%;
+}
+.presetColorContainer, .customColorContainer{
     width: 100%;
     margin-top: 2rem;
 }
-.presetColorHeader{
+.presetColorHeader, .customColorHeader{
     border-bottom: 1px solid #dddeee;
     padding-bottom: 0.5rem;
 
 }
-.presetColors{
+.presetColors, .customColors{
     padding-top: 1rem;
     grid-gap: 0.5rem;
     display: grid;
-    grid-template-columns: repeat( 4, 1fr)
+    grid-template-columns: repeat( 4, 1fr);
 }
 
 

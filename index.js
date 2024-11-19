@@ -23,6 +23,8 @@ const defaultColor = {
 
 const presetColorList = ['#FFB6C1', '#FFDAB9', '#FFFACD', '#E6E6FA', '#F0FFF0', '#FAFAD2', '#F5FFFA', '#F0F8FF', '#F5F5DC', '#FFE4E1', '#E0FFFF', '#D8BFD8', '#D3D3D3', '#FFFAF0', '#FFF5EE', '#FDF5E6', '#F8F8FF', '#FFF0F5', '#FAEBD7', '#FFFFE0'];
 
+let customColorList = [];
+
 const copySound = new Audio('Audio/mixkit-fast-double-click-on-mouse-275.wav')
   
 
@@ -50,8 +52,10 @@ function main(){
     const colorSliderBlue = document.getElementById('colorSliderBlue')
     const copyToClipBoardButton = document.getElementById('copyToClipBoardButton');
     const presetColorsParent = document.getElementById('presetColors')
+    const customColorsParent = document.getElementById('customColors')
+    const saveCustomColorButton = document.getElementById('saveCustomColorButton');
     
-    
+
     
     // event listeners
     generateRandomColorButton.addEventListener('click', handleGenerateRandomColorButton)
@@ -61,6 +65,9 @@ function main(){
     colorSliderBlue.addEventListener('change', () => { handlerColorSlider(colorSliderRed, colorSliderGreen, colorSliderBlue)})
     copyToClipBoardButton.addEventListener('click', () => { handlerCopyToClipBoardButton()})
     presetColorsParent.addEventListener('click', handlerPresetColorsParent)
+    customColorsParent.addEventListener('click', handlerPresetColorsParent)
+    saveCustomColorButton.addEventListener('click',handlerSaveCustomColorButton(customColorsParent,HexColorInputOutput))
+
     
 } // main function end 
 
@@ -79,10 +86,6 @@ function handleHexColorInputOutput(event){
             const hexToDecimal = hexToDecimalNumber(HexColorCode); // get hexToDecimal object
             updateColorToDom(hexToDecimal)
        }
-    //    else{
-    //     const HexValue =  document.getElementById('HexColorInputOutput').value
-    //     generateToastMsg(`#${HexValue} is Invalid Hex code`)
-    //    }
     }
    };
    function handlerColorSlider(colorSliderRed, colorSliderGreen, colorSliderBlue){
@@ -130,9 +133,24 @@ function handlerCopyToClipBoardButton(){
 function handlerPresetColorsParent(event) {
     const child = event.target
     if(child.className === 'colorBox'){
-        navigator.clipboard.writeText(child.getAttribute('dataColor'))
-        copySound.volume = 0.2
+        const colorCode = child.getAttribute('dataColor')
+        navigator.clipboard.writeText(colorCode)
+        copySound.volume = 0.5
         copySound.play();
+        if( toastMessageContainer !== null){
+            toastMessageContainer.remove();
+            toastMessageContainer = null;
+                    
+        }
+        generateToastMsg(colorCode)
+    }
+}
+
+function handlerSaveCustomColorButton(parent, HexColorInputOutput){
+    return function(){
+        customColorList.push(`#${HexColorInputOutput.value}`)
+        removeChildren(parent)
+        displayColorBoxes(parent, customColorList)
     }
 }
 
@@ -223,8 +241,20 @@ function displayColorBoxes(parent, colors){
     })
 }
 
+/**
+ * Remove all children from parent
+ * @param {object} parent 
+ */
+function removeChildren(parent){
+    let child = parent.lastElementChild;
+    while(child){
+        parent.removeChild(child)
+        child = parent.lastElementChild;
+    }
+}
 
-//Utils function
+
+//Utils function 
 
 /**
  *Generate random number for color code
