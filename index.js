@@ -1,9 +1,4 @@
 
-/*
-  Node: update list
-  * if user hex input with # then slice it and generate or change color code.
-*/
-
 
 /**
  * Date : nov 16 2024
@@ -15,19 +10,15 @@
 // Globals variable
 
 let toastMessageContainer = null;
-const defaultColor = {
-    red : 221,
-    green : 222,
-    blue : 238
-}
+const defaultColor = {red : 221, green : 222, blue : 238}
 
 const presetColorList = ['#FFB6C1', '#FFDAB9', '#FFFACD', '#E6E6FA', '#F0FFF0', '#FAFAD2', '#F5FFFA', '#F0F8FF', '#F5F5DC', '#FFE4E1', '#E0FFFF', '#D8BFD8', '#D3D3D3', '#FFFAF0', '#FFF5EE', '#FDF5E6', '#F8F8FF', '#FFF0F5', '#FAEBD7', '#FFFFE0'];
 
-let customColorList = [];
+let customColorList = new Array(12)
 
 const copySound = new Audio('Audio/mixkit-fast-double-click-on-mouse-275.wav')
   
-
+let imgURL = '';
 
 //Onload handler 
 window.onload = () => {
@@ -37,6 +28,14 @@ window.onload = () => {
     // Display preset colors
     const parent = document.getElementById('presetColors')
     displayColorBoxes(parent, presetColorList) // parent, color
+
+    //display color from localStorage
+    const customColorListFromLocalStorage = localStorage.getItem('customColor');
+    if(customColorListFromLocalStorage){
+        customColorList = JSON.parse(customColorListFromLocalStorage)
+        displayColorBoxes(document.getElementById('customColors'), customColorList) // arguments : parent, color Array 
+    }
+    
     
 }
 
@@ -54,6 +53,10 @@ function main(){
     const presetColorsParent = document.getElementById('presetColors')
     const customColorsParent = document.getElementById('customColors')
     const saveCustomColorButton = document.getElementById('saveCustomColorButton');
+    const bgImageUploadHelper = document.getElementById('bgImageUploadHelper')
+    const bgMainInput = document.getElementById('bgMainInput')
+    const backgroundImagePre = document.getElementById('backgroundImagePre')
+    const ImageUploadHelpToBG = document.getElementById('ImageUploadHelpToBG')
     
 
     
@@ -68,6 +71,21 @@ function main(){
     customColorsParent.addEventListener('click', handlerPresetColorsParent)
     saveCustomColorButton.addEventListener('click',handlerSaveCustomColorButton(customColorsParent,HexColorInputOutput))
 
+    bgImageUploadHelper.addEventListener('click', function(){
+        bgMainInput.click()
+    })
+    bgMainInput.addEventListener('change', function(event) {
+        const file = event.target.files[0]
+        imgURL = URL.createObjectURL(file)
+        backgroundImagePre.style.backgroundImage = `url(${imgURL})`
+        backgroundImagePre.style.backgroundPosition = 'center'
+        backgroundImagePre.style.backgroundSize = 'cover'
+        
+    })
+
+    ImageUploadHelpToBG.addEventListener('click', () => {
+        document.body.style.backgroundImage = `url(${imgURL})`
+    })
     
 } // main function end 
 
@@ -156,17 +174,13 @@ function handlerSaveCustomColorButton(parent, HexColorInputOutput){
             }
             generateToastMsg(`${hexColor} is already your list`)
         }else{
-           if(customColorList.length < 12){
             customColorList.unshift(hexColor)
+            if(customColorList.length > 12){
+                customColorList = customColorList.slice(0,12)
+            }
+            localStorage.setItem('customColor', JSON.stringify(customColorList))
             removeChildren(parent)
             displayColorBoxes(parent, customColorList)
-           }else{
-            if( toastMessageContainer !== null){
-                toastMessageContainer.remove();
-                toastMessageContainer = null;
-            }
-            generateToastMsg('Your save list full')
-           }
         }
     }
 }
@@ -253,8 +267,10 @@ function generateColorBox(color){
  */
 function displayColorBoxes(parent, colors){
     colors.forEach((color) => {
+       if(color){
         const colorBox = generateColorBox(color)
         parent.appendChild(colorBox);
+       }
     })
 }
 

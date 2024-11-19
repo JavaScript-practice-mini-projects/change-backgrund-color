@@ -12,19 +12,22 @@ html{
 }
 body{
     background-color: #dddeee;
-
+    cursor: default;
 }
 
 /* main container  */
+
 .container{
-    width: 1000px;
+    width: 800px;
     margin:2rem auto;
     padding: 3rem;
     background-color: #fffffd;
     box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+
+}
+.firstSection{
     display: flex;
     justify-content: space-between;
-    
 }
 .colorDisplayAndInputOutput{
     width: 48%;
@@ -37,13 +40,13 @@ body{
     align-items: center;
     border-bottom: 1px solid #dddeee;
 }
-.displayTitle button, .colorChangeTitle button{
+
+.btn{
     color: #900C3F;
     cursor: pointer;
     padding: 0.3rem 0.5rem;
     user-select: none;
 }
-
 .displayColor{
     width: 100%;
     min-height: 8rem;
@@ -128,22 +131,26 @@ label{
 
 /* RGB color adjusting slider  */
 .adjustRGBcolor{
+    width: 100%;
     margin-top: 2rem;
 }
 .RGBcolorAdjusting{
     margin-top: 1rem;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
+}
+.rgbTitleAndValue{
+    width: 90%;
 }
 .colorRange{
     margin: 0.4rem 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-
-
-
-
+#colorSliderGreen, #colorSliderRed, #colorSliderBlue{
+    width: 100%;
+}
 
 .toastMessage{
     position: fixed;
@@ -155,6 +162,76 @@ label{
     background-color: rgb(61, 239, 61);
     cursor: default;
 }
+
+
+
+/* presetColorContainer */
+.colorPresetAndCustoms{
+    width: 48%;
+}
+.presetColorContainer, .customColorContainer{
+    width: 100%;
+    margin-top: 2rem;
+}
+.presetColorHeader, .customColorHeader{
+    border-bottom: 1px solid #dddeee;
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: default;
+
+}
+.presetColors, .customColors{
+    padding-top: 1rem;
+    grid-gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat( 4, 1fr);
+}
+
+/* second Section  */
+.secondSection{
+   
+}
+.secondSectionHeader{
+    margin: 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #dddeee;
+    
+}
+.backgroundPreviewContainer{
+    display: flex;
+    justify-content: space-between;
+
+}
+.preBGUpAdd{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bgRightPreview, .bgLeftPreview{
+    width: 48%;
+}
+.backgroundImagePre{
+    width: 100%;
+    height: 8rem;
+    margin: 0.7rem 0;
+    background-color: #dddeee;
+    display: block !important;
+
+}
+#bgMainInput{
+    display: none;
+}
+hh{
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+/* js dynamic class and id  */
+
 .toastMessage-slide-in{
     animation: toastMessage-animation-in 0.5s ease;
 }
@@ -182,29 +259,6 @@ label{
     }
 }
 
-
-/* presetColorContainer */
-.colorPresetAndCustoms{
-    width: 48%;
-}
-.presetColorContainer, .customColorContainer{
-    width: 100%;
-    margin-top: 2rem;
-}
-.presetColorHeader, .customColorHeader{
-    border-bottom: 1px solid #dddeee;
-    padding-bottom: 0.5rem;
-
-}
-.presetColors, .customColors{
-    padding-top: 1rem;
-    grid-gap: 0.5rem;
-    display: grid;
-    grid-template-columns: repeat( 4, 1fr);
-}
-
-
-/* js dynamic class and id  */
 .colorBox{
     height: 2rem;
     border: 1px solid gray;

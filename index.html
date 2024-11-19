@@ -9,11 +9,12 @@
 <body>
 
     <section class="container">
+    <div class="firstSection"> 
         <div class="colorDisplayAndInputOutput">
             <div class="displayTitleColorArea"> 
                 <div class="displayTitle">
                     <h3>Display Color</h3>
-                    <button id="generateRandomColorButton">Random Color</button>
+                    <button class="btn" id="generateRandomColorButton">Random Color</button>
                    
                 </div>
                 
@@ -26,8 +27,8 @@
                 <div class="colorChangeTitle">
                     <h3>Change & Copy color</h3>
                     <div>
-                        <button id="saveCustomColorButton">Save</button>
-                        <button id="copyToClipBoardButton">Copy</button>
+                        <button class="btn" id="saveCustomColorButton">Save</button>
+                        <button class="btn" id="copyToClipBoardButton">Copy</button>
                     </div>
                 </div>
                 <div class="colorChangeMode">
@@ -81,7 +82,7 @@
         <div class="colorPresetAndCustoms">
                 <!-- preset Color Container -->
             <div class="presetColorContainer">
-                <div class="presetColorHeader"><h3>Preset Color</h3></div>
+                <div class="presetColorHeader"><h3>Preset Color</h3> <h5>20 boxes</h5></div>
                 <div class="presetColors" id="presetColors">
                     <!-- here store all preset colors  -->
                 </div>
@@ -89,10 +90,33 @@
 
             <!-- customColorContainer -->
             <div class="customColorContainer">
-                <div class="customColorHeader"><h3>Custom Color</h3></div>
+                <div class="customColorHeader"><h3>Custom Color</h3> <h5>12 boxes</h5></div>
                 <div class="customColors" id="customColors">
                     <!-- here store all custom colors  -->
                 </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- New section -->
+        <div class="diverder"></div>
+
+        <div class="secondSection">
+            <h3 class="secondSectionHeader">Background Preferences</h3> 
+            <div class="backgroundPreviewContainer">
+                <div class="bgRightPreview">
+                    <div class="bgRightPreviewContainer">
+                        <h4>Background Preview</h4>
+                        <div class="backgroundImagePre" id="backgroundImagePre" > <!-- here show preview Images --></div>
+                        <input type="file" name="" id="bgMainInput">
+                        <div class="preBGUpAdd">
+                            <button class="btn bgUploadbtn" id="bgImageUploadHelper">Upload</button>
+                            <button class="btn bgUploadbtn" id="ImageUploadHelpToBG">Add Background</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="bgLeftPreview"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas non alias magnam vitae eligendi eius incidunt quibusdam quidem quod? Tenetur!</p></div>
             </div>
         </div>
     </section>
