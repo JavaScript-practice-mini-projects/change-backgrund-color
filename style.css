@@ -16,6 +16,19 @@ body{
     
 }
 
+/* social media  */
+.socialMedia{
+    margin-bottom:  1rem ;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+}
+.socialMedia i{
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
 /* main container  */
 
 .container{
