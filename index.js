@@ -10,25 +10,29 @@
 // Globals variable
 
 let toastMessageContainer = null;
-const defaultColor = {red : 221, green : 222, blue : 238}
-
-const presetColorList = ['#FFB6C1', '#FFDAB9', '#FFFACD', '#E6E6FA', '#F0FFF0', '#FAFAD2', '#F5FFFA', '#F0F8FF', '#F5F5DC', '#FFE4E1', '#E0FFFF', '#D8BFD8', '#D3D3D3', '#FFFAF0', '#FFF5EE', '#FDF5E6', '#F8F8FF', '#FFF0F5', '#FAEBD7', '#FFFFE0'];
-
+let imgURL = '';
 let customColorList = new Array(12)
 
+const defaultColor = {red : 221, green : 222, blue : 238}
+const presetColorList = ['#FFB6C1', '#FFDAB9', '#FFFACD', '#E6E6FA', '#F0FFF0', '#FAFAD2', '#F5FFFA', '#F0F8FF', '#F5F5DC', '#FFE4E1', '#E0FFFF', '#D8BFD8', '#D3D3D3', '#FFFAF0', '#FFF5EE', '#FDF5E6', '#F8F8FF', '#FFF0F5', '#FAEBD7', '#FFFFE0'];
 const copySound = new Audio('Audio/mixkit-fast-double-click-on-mouse-275.wav')
-  
-let imgURL = '';
+const ImageAddToBG = document.getElementById('ImageAddToBG')
+const bgDeleteBtn = document.getElementById('bgDeletebtn')
+const backgroundImagePre = document.getElementById('backgroundImagePre')
+const bgMainInput = document.getElementById('bgMainInput')
+
+
+
 
 //Onload handler 
 window.onload = () => {
     main();
     updateColorToDom(defaultColor)
-
+    
     // Display preset colors
     const parent = document.getElementById('presetColors')
     displayColorBoxes(parent, presetColorList) // parent, color
-
+    
     //display color from localStorage
     const customColorListFromLocalStorage = localStorage.getItem('customColor');
     if(customColorListFromLocalStorage){
@@ -41,9 +45,9 @@ window.onload = () => {
 
 // main or boot function, The function will take care of getting all the DOM references
 function main(){
-
+    
     // Dom references
-
+    
     const generateRandomColorButton = document.getElementById('generateRandomColorButton')
     const HexColorInputOutput = document.getElementById('HexColorInputOutput')
     const colorSliderRed = document.getElementById('colorSliderRed')
@@ -54,9 +58,7 @@ function main(){
     const customColorsParent = document.getElementById('customColors')
     const saveCustomColorButton = document.getElementById('saveCustomColorButton');
     const bgImageUploadHelper = document.getElementById('bgImageUploadHelper')
-    const bgMainInput = document.getElementById('bgMainInput')
-    const backgroundImagePre = document.getElementById('backgroundImagePre')
-    const ImageUploadHelpToBG = document.getElementById('ImageUploadHelpToBG')
+    
     
 
     
@@ -70,22 +72,9 @@ function main(){
     presetColorsParent.addEventListener('click', handlerPresetColorsParent)
     customColorsParent.addEventListener('click', handlerPresetColorsParent)
     saveCustomColorButton.addEventListener('click',handlerSaveCustomColorButton(customColorsParent,HexColorInputOutput))
-
-    bgImageUploadHelper.addEventListener('click', function(){
-        bgMainInput.click()
-    })
-    bgMainInput.addEventListener('change', function(event) {
-        const file = event.target.files[0]
-        imgURL = URL.createObjectURL(file)
-        backgroundImagePre.style.backgroundImage = `url(${imgURL})`
-        backgroundImagePre.style.backgroundPosition = 'center'
-        backgroundImagePre.style.backgroundSize = 'cover'
-        
-    })
-
-    ImageUploadHelpToBG.addEventListener('click', () => {
-        document.body.style.backgroundImage = `url(${imgURL})`
-    })
+    bgImageUploadHelper.addEventListener('click', () => bgMainInput.click())
+    bgMainInput.addEventListener('change',handlerBgMainInput)
+    ImageAddToBG.addEventListener('click', handlerImageAddToBG)
     
 } // main function end 
 
@@ -185,6 +174,26 @@ function handlerSaveCustomColorButton(parent, HexColorInputOutput){
     }
 }
 
+function handlerBgMainInput(event) {
+    const file = event.target.files[0]
+    imgURL = URL.createObjectURL(file)
+    backgroundImagePre.style.backgroundImage = `url(${imgURL})`
+    backgroundImagePre.style.backgroundPosition = 'center'
+    backgroundImagePre.style.backgroundSize = 'cover'  
+    ImageAddToBG.style.display = 'block'
+}
+
+function handlerImageAddToBG(){
+    document.body.style.backgroundImage = `url(${imgURL})`
+    ImageAddToBG.style.display = 'none'
+    bgDeleteBtn.style.display = 'block'
+    bgDeleteBtn.addEventListener('click', function(){
+        document.body.style.backgroundImage = 'none'
+        backgroundImagePre.style.backgroundImage = 'none'
+        bgDeleteBtn.style.display = 'none'
+        bgMainInput.value = null;
+    })
+}
 
 
 

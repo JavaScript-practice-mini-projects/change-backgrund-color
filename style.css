@@ -13,6 +13,8 @@ html{
 body{
     background-color: #dddeee;
     cursor: default;
+    background-size: cover;
+    background-position: center;
 }
 
 /* main container  */
@@ -208,6 +210,9 @@ label{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.bgDeletebtn, .bgAddbtn{
+    display: none;
 }
 .bgRightPreview, .bgLeftPreview{
     width: 48%;
