@@ -13,8 +13,7 @@ html{
 body{
     background-color: #dddeee;
     cursor: default;
-    background-size: cover;
-    background-position: center;
+    
 }
 
 /* main container  */
@@ -25,7 +24,7 @@ body{
     padding: 3rem;
     background-color: #fffffd;
     box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-
+    /* background: transparent !important; */
 }
 .firstSection{
     display: flex;
@@ -165,8 +164,6 @@ label{
     cursor: default;
 }
 
-
-
 /* presetColorContainer */
 .colorPresetAndCustoms{
     width: 48%;
@@ -228,12 +225,17 @@ label{
 #bgMainInput{
     display: none;
 }
-hh{
-    background-position: center;
-    background-size: cover;
+
+/* section 3rd   */
+#bgController{
+    display: none;
 }
-
-
+.selectGroup{
+    width: 80%;
+    border: 1px solid gray;
+    margin: 0.5rem 0;
+    padding: 0.3rem 0;
+}
 
 /* js dynamic class and id  */
 
@@ -263,7 +265,6 @@ hh{
         opacity: 0;
     }
 }
-
 .colorBox{
     height: 2rem;
     border: 1px solid gray;

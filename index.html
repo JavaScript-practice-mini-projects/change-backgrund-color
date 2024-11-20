@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <section class="container">
+    <section class="container" id="container">
     <div class="firstSection"> 
         <div class="colorDisplayAndInputOutput">
             <div class="displayTitleColorArea"> 
@@ -17,11 +17,9 @@
                     <button class="btn" id="generateRandomColorButton">Random Color</button>
                    
                 </div>
-                
                 <div class="displayColor" id="displayColor">
                     <!-- Here show color  -->
                 </div>
-    
             </div>
             <div class="changeAndCopy">
                 <div class="colorChangeTitle">
@@ -111,19 +109,56 @@
                         <input type="file" name="" id="bgMainInput" accept="image/*">
                         <div class="preBGUpAdd">
                             <button class="btn bgUploadbtn" id="bgImageUploadHelper">Upload</button>
-                            <button class="btn bgDeletebtn" id="bgDeletebtn">Background Delete</button>
+                            <button class="btn bgDeletebtn" id="bgDeleteBtn">Background Delete</button>
                             <button class="btn bgAddbtn" id="ImageAddToBG">Add Background</button>
                         </div>
                     </div>
                 </div>
-    
-                <div class="bgLeftPreview"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas non alias magnam vitae eligendi eius incidunt quibusdam quidem quod? Tenetur!</p></div>
+                <!-- section 3rd  -->
+                <div class="bgLeftPreview">
+                    <div id="bgController">
+                        <div class="bgControlGroup">
+                            <h3>Background Size</h3>
+                            <select name="" id="backgroundSize" class="selectGroup">
+                               <option value="auto" >Auto</option>
+                               <option value="cover" selected >Cover</option>
+                               <option value="contain" >Contain</option>
+                            </select>
+                        </div>
+
+                        <div class="bgControlGroup">
+                            <h3>Background Repeat</h3>
+                            <select name="" id="backgroundRepeat" class="selectGroup">
+                               <option value="no-repeat"  >No-repeat</option>
+                               <option value="repeat"selected >Repeat</option>
+                            </select>
+                        </div>
+
+                        <div class="bgControlGroup">
+                            <h3>Background Position</h3>
+                            <select name="" id="backgroundPosition" class="selectGroup">
+                               <option value="top">Top</option>
+                               <option value="right">Right</option>
+                               <option value="bottom">Bottom</option>
+                               <option value="left">Left</option>
+                               <option value="center" selected>Center</option>
+                            </select>
+                        </div>
+
+                        <div class="bgControlGroup">
+                            <h3>Background Attachment</h3>
+                            <select name="" id="backgroundAttachment" class="selectGroup">
+                               <option value="Fixed">Fixed</option>
+                               <option value="scroll" selected>Scroll</option>
+                              
+                            </select>
+                        </div>
+                        
+                    </div>    
+                </div>
             </div>
         </div>
     </section>
-
-
-   
 
     <script src="index.js"></script>
 </body>
